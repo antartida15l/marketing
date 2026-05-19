@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUPET – Presentación</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-deep:   #1a0a2e;
+    --purple-dark:   #2d1457;
+    --purple-mid:    #6b21a8;
+    --purple-soft:   #a855f7;
+    --purple-light:  #d8b4fe;
+    --purple-pale:   #f3e8ff;
+    --lilac:         #c084fc;
+    --white:         #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--purple-deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: .4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 2.5rem;
+    background: rgba(26,10,46,.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(168,85,247,.18);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--purple-soft), var(--lilac), var(--white));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -.5px;
+  }
+  .logo span { font-style: italic; }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--purple-light); text-decoration: none;
+    font-size: .85rem; font-weight: 500; letter-spacing: .04em;
+    transition: color .2s;
+  }
+  nav ul a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(90px); opacity: .35;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .hero-blob.b1 { width:520px;height:520px;background:var(--purple-mid);top:-100px;left:-120px; }
+  .hero-blob.b2 { width:380px;height:380px;background:var(--lilac);bottom:-80px;right:-80px;animation-delay:-4s; }
+  .hero-blob.b3 { width:260px;height:260px;background:#7e22ce;top:40%;left:55%;animation-delay:-2s; }
+  @keyframes drift { to { transform: translate(30px,20px) scale(1.06); } }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(168,85,247,.15); border: 1px solid rgba(168,85,247,.4);
+    color: var(--purple-light); font-size:.78rem; font-weight:600;
+    letter-spacing:.12em; text-transform:uppercase;
+    padding:.4rem 1.1rem; border-radius:100px; margin-bottom:1.4rem;
+    animation: fadeUp .7s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem,9vw,7rem); font-weight:900; line-height:1;
+    background: linear-gradient(135deg,#fff 30%,var(--purple-light) 60%,var(--lilac) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom:.6rem;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero-sub {
+    font-size: clamp(1rem,2.5vw,1.3rem);
+    color: var(--purple-light); font-weight:300; max-width:560px;
+    line-height:1.6; margin:0 auto 2.4rem;
+    animation: fadeUp .7s .2s ease both;
+  }
+  .hero-img-row {
+    display:flex; justify-content:center; gap:1.2rem; margin-bottom:2rem;
+    animation: fadeUp .7s .3s ease both;
+  }
+  .hero-img-row img {
+    width:88px; height:88px; object-fit:cover; border-radius:50%;
+    border:3px solid rgba(168,85,247,.5);
+    box-shadow: 0 0 40px rgba(168,85,247,.35);
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+
+  /* SECTIONS */
+  section { position:relative; z-index:1; padding:6rem 2rem; }
+  .container { max-width:1080px; margin:0 auto; }
+
+  .section-label {
+    font-size:.75rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--lilac); margin-bottom:.5rem;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.9rem,4vw,2.9rem); font-weight:800;
+    color:var(--white); margin-bottom:1rem; line-height:1.15;
+  }
+  .section-title em { font-style:italic; color:var(--purple-light); }
+  .divider {
+    width:56px; height:3px;
+    background:linear-gradient(90deg,var(--purple-soft),var(--lilac));
+    border-radius:99px; margin-bottom:2.6rem;
+  }
+
+  /* ===================== RESUMEN TABLE ===================== */
+  #resumen { background: linear-gradient(180deg, var(--purple-deep) 0%, #160924 100%); padding-top: 7rem; }
+
+  .resumen-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(168,85,247,.3);
+    box-shadow: 0 0 60px rgba(107,33,168,.25);
+  }
+  .resumen-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .resumen-table thead tr {
+    background: linear-gradient(90deg, rgba(107,33,168,.6), rgba(168,85,247,.3));
+  }
+  .resumen-table thead th {
+    padding: 1rem 1.6rem;
+    font-size: .78rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--purple-light); text-align: left;
+  }
+  .resumen-table tbody tr {
+    border-top: 1px solid rgba(168,85,247,.1);
+    transition: background .2s;
+  }
+  .resumen-table tbody tr:hover { background: rgba(168,85,247,.08); }
+  .resumen-table tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
+  .resumen-table tbody tr:nth-child(odd):hover { background: rgba(168,85,247,.08); }
+  .resumen-table td {
+    padding: 1.1rem 1.6rem;
+    font-size: .92rem;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .resumen-table td:first-child {
+    font-weight: 700; color: var(--lilac);
+    width: 260px; white-space: nowrap;
+    border-right: 1px solid rgba(168,85,247,.15);
+  }
+  .resumen-table td:last-child { color: var(--purple-pale); }
+  .resumen-table td .tag-inline {
+    display: inline-block;
+    background: rgba(168,85,247,.18); border: 1px solid rgba(168,85,247,.3);
+    color: var(--purple-light); font-size: .76rem; font-weight: 600;
+    padding: .2rem .65rem; border-radius: 100px; margin: .15rem .15rem 0 0;
+  }
+
+  /* ===================== EQUIPO ===================== */
+  #equipo { background: linear-gradient(180deg, #160924 0%, #1e0b36 100%); }
+
+  .team-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.8rem;
+  }
+  .team-card {
+    background: linear-gradient(145deg,rgba(107,33,168,.22),rgba(45,20,87,.5));
+    border:1px solid rgba(168,85,247,.22); border-radius:24px;
+    padding:2rem 1.4rem; text-align:center;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+    position:relative; overflow:hidden;
+  }
+  .team-card::after {
+    content:''; position:absolute; inset:-60% -60%; border-radius:50%;
+    background:radial-gradient(circle,rgba(168,85,247,.12) 0%,transparent 70%);
+    transition:opacity .4s; opacity:0;
+  }
+  .team-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 30px 60px rgba(107,33,168,.4); }
+  .team-card:hover::after { opacity:1; }
+
+  .avatar-ring {
+    width:110px; height:110px; border-radius:50%;
+    margin:0 auto 1.2rem;
+    background:linear-gradient(135deg,var(--purple-mid),var(--lilac));
+    padding:3px;
+  }
+  .avatar-inner {
+    width:100%; height:100%; border-radius:50%;
+    background:var(--purple-dark);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .avatar-inner img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+  .team-name {
+    font-family:'Playfair Display',serif;
+    font-size:1rem; font-weight:700; color:var(--white);
+    margin-bottom:.25rem; line-height:1.25;
+  }
+  .team-role { font-size:.78rem; color:var(--purple-light); font-weight:500; letter-spacing:.04em; }
+
+  /* ORGANIGRAMA del equipo */
+  .org-chart-wrap {
+    margin-top: 3rem;
+  }
+  .org-chart-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .org-chart {
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .org-node-top {
+    background: linear-gradient(135deg, rgba(107,33,168,.5), rgba(168,85,247,.25));
+    border: 1.5px solid rgba(168,85,247,.5);
+    border-radius: 14px; padding: .9rem 2rem;
+    font-size: .9rem; font-weight: 700; color: var(--white);
+    text-align: center; position: relative;
+  }
+  .org-connector-down {
+    width: 2px; height: 32px;
+    background: linear-gradient(180deg, var(--purple-soft), transparent);
+  }
+  .org-row {
+    display: flex; gap: 1.2rem; align-items: flex-start; position: relative;
+  }
+  .org-row::before {
+    content: '';
+    position: absolute; top: 0; left: calc(50% - 1px);
+    width: 2px; height: 20px;
+    background: rgba(168,85,247,.4);
+  }
+  .org-horizontal-line {
+    position: absolute; top: 20px; left: 10%; right: 10%; height: 2px;
+    background: rgba(168,85,247,.3);
+  }
+  .org-col {
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .org-node-member {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(168,85,247,.22);
+    border-radius: 12px; padding: .75rem 1.2rem;
+    font-size: .82rem; color: var(--purple-pale);
+    text-align: center; min-width: 160px;
+    line-height: 1.5;
+  }
+  .org-node-member strong { color: var(--lilac); display: block; font-size: .85rem; }
+  .org-stem { width: 2px; height: 24px; background: rgba(168,85,247,.3); }
+
+  /* ===================== SLIDE 1 ===================== */
+  #slide1 { background:linear-gradient(180deg,#1e0b36 0%,#200b38 100%); }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+  @media(max-width:680px){ .two-col{ grid-template-columns:1fr; } }
+
+  .card-glass {
+    background:rgba(255,255,255,.04); border:1px solid rgba(168,85,247,.2);
+    border-radius:20px; padding:0; overflow:hidden;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .card-glass:hover { transform:translateY(-5px); box-shadow:0 24px 56px rgba(107,33,168,.35); }
+  .card-glass-img { width:100%; height:180px; object-fit:cover; opacity:.8; display:block; }
+  .card-glass-body { padding:1.8rem; }
+  .card-glass h3 { font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:.7rem; color:var(--lilac); }
+  .card-glass p { color:var(--purple-pale); font-size:.93rem; line-height:1.7; }
+
+  .problem-badge {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.3);
+    color:#fca5a5; padding:.35rem .9rem; border-radius:100px;
+    font-size:.8rem; font-weight:600; margin-bottom:1rem;
+  }
+  .alt-chips { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+  .chip {
+    background:rgba(168,85,247,.12); border:1px solid rgba(168,85,247,.25);
+    color:var(--purple-light); font-size:.78rem; padding:.28rem .8rem; border-radius:100px;
+  }
+
+  /* FLOW DIAGRAM – problema */
+  .flow-diagram {
+    margin-top: 3rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .flow-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0; flex-wrap: wrap; justify-content: center;
+  }
+  .flow-box {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.25);
+    border-radius: 12px; padding: .8rem 1.2rem;
+    font-size: .84rem; color: var(--purple-pale);
+    text-align: center; min-width: 130px;
+    line-height: 1.4;
+  }
+  .flow-box.start {
+    background: linear-gradient(135deg,rgba(239,68,68,.2),rgba(239,68,68,.08));
+    border-color: rgba(239,68,68,.4); color: #fca5a5;
+    font-weight: 700;
+  }
+  .flow-box.end {
+    background: linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.08));
+    border-color: rgba(34,197,94,.4); color: #86efac;
+    font-weight: 700;
+  }
+  .flow-box.highlight {
+    background: linear-gradient(135deg,rgba(168,85,247,.3),rgba(107,33,168,.2));
+    border-color: rgba(168,85,247,.5); color: var(--white);
+    font-weight: 600;
+  }
+  .flow-arrow {
+    font-size: 1.3rem; color: rgba(168,85,247,.5); padding: 0 .5rem; flex-shrink: 0;
+  }
+  .flow-arrow-down {
+    width: 2px; height: 24px;
+    background: linear-gradient(180deg,rgba(168,85,247,.5),rgba(168,85,247,.2));
+    margin: 0 auto;
+  }
+
+  /* ===================== SLIDE 2 ===================== */
+  #slide2 { background:#200b38; }
+
+  .audience-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; }
+  .audience-card {
+    background:linear-gradient(135deg,rgba(107,33,168,.25),rgba(168,85,247,.1));
+    border:1px solid rgba(168,85,247,.22); border-radius:18px;
+    overflow:hidden; text-align:center;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .audience-card:hover { transform:translateY(-6px); box-shadow:0 20px 44px rgba(107,33,168,.3); }
+  .audience-card .aud-img { width:100%; height:150px; object-fit:cover; opacity:.75; display:block; }
+  .audience-card .aud-body { padding:1.2rem 1.4rem 1.6rem; }
+  .audience-card h4 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); margin-bottom:.4rem; }
+  .audience-card p { font-size:.84rem; color:var(--purple-light); line-height:1.6; }
+
+  .need-row {
+    margin-top:3rem;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem;
+  }
+  .need-item {
+    display:flex; gap:.75rem; align-items:flex-start;
+    background:rgba(255,255,255,.03); border:1px solid rgba(168,85,247,.15);
+    border-radius:14px; padding:1.2rem;
+  }
+  .need-dot { width:10px; height:10px; border-radius:50%; background:var(--purple-soft); flex-shrink:0; margin-top:5px; }
+  .need-item p { font-size:.88rem; color:var(--purple-pale); line-height:1.55; }
+
+  /* MAPA MENTAL – clientes */
+  .mind-map-wrap {
+    margin-top: 3rem;
+  }
+  .mind-map-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .mind-map-svg-container {
+    width: 100%; overflow-x: auto;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(168,85,247,.18);
+    border-radius: 20px; padding: 1.5rem;
+  }
+
+  /* ===================== SLIDE 3 ===================== */
+  #slide3 { background:linear-gradient(180deg,#200b38 0%,var(--purple-deep) 100%); }
+
+  .levels-stack { display:flex; flex-direction:column; gap:1.4rem; }
+  .level-card {
+    display:grid; grid-template-columns:220px 1fr;
+    background:rgba(255,255,255,.04); border-radius:18px;
+    border:1px solid rgba(168,85,247,.2); overflow:hidden;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .level-card:hover { transform:translateX(6px); box-shadow:-4px 0 0 var(--purple-soft),0 16px 40px rgba(107,33,168,.3); }
+  @media(max-width:560px){ .level-card{ grid-template-columns:1fr; } }
+  .level-label { position:relative; overflow:hidden; min-height:140px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .level-label img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.5; }
+  .level-label-text {
+    position:relative; z-index:1; padding:1.2rem 1.2rem 1.4rem;
+    background:linear-gradient(0deg,rgba(26,10,46,.9) 0%,transparent 100%);
+  }
+  .level-num { font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--purple-light); display:block; }
+  .level-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); display:block; margin-top:.2rem; }
+  .level-body { padding:1.8rem; border-left:1px solid rgba(168,85,247,.15); }
+  .level-body h4 { font-size:.8rem; font-weight:700; color:var(--lilac); letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem; }
+  .level-body p { font-size:.92rem; color:var(--purple-pale); line-height:1.7; }
+
+  /* PIRÁMIDE de niveles */
+  .pyramid-wrap {
+    margin-top: 3rem;
+  }
+  .pyramid-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .pyramid-container {
+    display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(168,85,247,.18);
+    border-radius: 20px; padding: 2rem 1rem;
+  }
+  .pyramid-level {
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; position: relative;
+    transition: transform .25s;
+    cursor: default;
+  }
+  .pyramid-level:hover { transform: scaleX(1.02); }
+  .pyramid-level-3 {
+    width: 55%; padding: 1.1rem 1.6rem;
+    background: linear-gradient(135deg,rgba(168,85,247,.35),rgba(192,132,252,.2));
+    border: 1px solid rgba(168,85,247,.5);
+  }
+  .pyramid-level-2 {
+    width: 75%; padding: 1.1rem 1.6rem;
+    background: linear-gradient(135deg,rgba(107,33,168,.35),rgba(168,85,247,.15));
+    border: 1px solid rgba(168,85,247,.35);
+  }
+  .pyramid-level-1 {
+    width: 95%; padding: 1.1rem 1.6rem;
+    background: linear-gradient(135deg,rgba(45,20,87,.5),rgba(107,33,168,.2));
+    border: 1px solid rgba(168,85,247,.25);
+  }
+  .pyramid-level-label {
+    font-family: 'Playfair Display', serif;
+    font-size: .9rem; font-weight: 700; color: var(--white); margin-bottom: .25rem;
+  }
+  .pyramid-level-sub { font-size: .78rem; color: var(--purple-light); line-height: 1.4; }
+  .pyramid-level-num {
+    position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%);
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    color: rgba(168,85,247,.6); text-transform: uppercase;
+  }
+
+  /* ===================== SLIDE 4 ===================== */
+  #slide4 { background:var(--purple-deep); }
+
+  .value-wrap { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; }
+  @media(max-width:680px){ .value-wrap{ grid-template-columns:1fr; } }
+  .value-img { width:100%; border-radius:20px; height:340px; object-fit:cover; opacity:.85; }
+
+  .value-box {
+    background:linear-gradient(135deg,rgba(107,33,168,.3),rgba(45,20,87,.6));
+    border:1px solid rgba(168,85,247,.3); border-radius:24px; padding:2.4rem;
+    position:relative; overflow:hidden; margin-bottom:1.4rem;
+  }
+  .value-box::before {
+    content:'❝'; font-size:8rem; line-height:1; color:rgba(168,85,247,.1);
+    position:absolute; top:-10px; left:20px; font-family:'Playfair Display',serif;
+  }
+  .value-box p { font-size:clamp(.9rem,1.8vw,1.03rem); line-height:1.85; color:var(--purple-pale); position:relative; z-index:1; }
+  .value-box p strong { color:var(--white); font-weight:600; }
+
+  .value-pills { display:flex; flex-wrap:wrap; gap:.7rem; }
+  .v-pill {
+    background:rgba(168,85,247,.14); border:1px solid rgba(168,85,247,.3);
+    color:var(--purple-light); font-size:.82rem; font-weight:500;
+    padding:.5rem 1rem; border-radius:100px;
+    transition:background .2s,transform .2s;
+  }
+  .v-pill:hover { background:rgba(168,85,247,.28); transform:scale(1.04); }
+
+  /* CANVAS DE VALOR */
+  .value-canvas-wrap { margin-top: 3rem; }
+  .value-canvas-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .value-canvas {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0; border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(168,85,247,.25);
+  }
+  @media(max-width:600px){ .value-canvas{ grid-template-columns: 1fr; } }
+  .vc-col {
+    padding: 1.6rem 1.4rem;
+    border-right: 1px solid rgba(168,85,247,.15);
+  }
+  .vc-col:last-child { border-right: none; }
+  .vc-col:nth-child(1) { background: rgba(239,68,68,.08); }
+  .vc-col:nth-child(2) { background: rgba(168,85,247,.12); }
+  .vc-col:nth-child(3) { background: rgba(34,197,94,.08); }
+  .vc-col h5 {
+    font-size: .73rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .vc-col:nth-child(1) h5 { color: #fca5a5; }
+  .vc-col:nth-child(2) h5 { color: var(--lilac); }
+  .vc-col:nth-child(3) h5 { color: #86efac; }
+  .vc-item {
+    display: flex; gap: .6rem; align-items: flex-start;
+    margin-bottom: .7rem; font-size: .83rem;
+    color: var(--purple-pale); line-height: 1.5;
+  }
+  .vc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .vc-col:nth-child(1) .vc-dot { background: #f87171; }
+  .vc-col:nth-child(2) .vc-dot { background: var(--purple-soft); }
+  .vc-col:nth-child(3) .vc-dot { background: #4ade80; }
+
+  /* ===================== SLIDE 5 ===================== */
+  #slide5 { background:linear-gradient(180deg,var(--purple-deep) 0%,#200b38 100%); }
+
+  .diff-wrap { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
+  @media(max-width:680px){ .diff-wrap{ grid-template-columns:1fr; } }
+  .diff-side-img { width:100%; border-radius:20px; height:300px; object-fit:cover; opacity:.75; }
+
+  .diff-table { width:100%; border-collapse:separate; border-spacing:0 .8rem; }
+  .diff-table thead th {
+    text-align:left; font-size:.78rem; font-weight:700;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--purple-soft); padding:.4rem 1.2rem;
+  }
+  .diff-table tbody tr { background:rgba(255,255,255,.04); transition:background .2s; }
+  .diff-table tbody tr:hover { background:rgba(168,85,247,.1); }
+  .diff-table td { padding:1rem 1.2rem; color:var(--purple-pale); font-size:.88rem; line-height:1.5; }
+  .diff-table td:first-child { font-weight:700; color:var(--lilac); width:140px; border-radius:12px 0 0 12px; }
+  .diff-table td:last-child { border-radius:0 12px 12px 0; }
+
+  /* COMPARACIÓN COMPETIDORES */
+  .comp-matrix-wrap { margin-top: 3rem; }
+  .comp-matrix-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .comp-matrix {
+    width: 100%; border-collapse: collapse;
+    background: rgba(255,255,255,.03); border-radius: 16px; overflow: hidden;
+  }
+  .comp-matrix th {
+    padding: .8rem 1rem; font-size: .78rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--purple-soft);
+    border-bottom: 1px solid rgba(168,85,247,.2);
+    background: rgba(107,33,168,.2);
+    text-align: center;
+  }
+  .comp-matrix th:first-child { text-align: left; }
+  .comp-matrix td {
+    padding: .8rem 1rem; font-size: .85rem; text-align: center;
+    border-bottom: 1px solid rgba(168,85,247,.08);
+    color: var(--purple-pale);
+  }
+  .comp-matrix td:first-child { text-align: left; font-weight: 600; color: var(--lilac); }
+  .comp-matrix tbody tr:hover { background: rgba(168,85,247,.07); }
+  .check { color: #4ade80; font-size: 1rem; }
+  .cross { color: #f87171; font-size: 1rem; }
+  .partial { color: #fbbf24; font-size: 1rem; }
+
+  /* ===================== SLIDE 6 ===================== */
+  #slide6 { background:#200b38; }
+
+  .val-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  @media(max-width:660px){ .val-grid{ grid-template-columns:1fr; } }
+
+  .val-block { background:rgba(255,255,255,.04); border:1px solid rgba(168,85,247,.2); border-radius:18px; overflow:hidden; }
+  .val-block-img { width:100%; height:120px; object-fit:cover; opacity:.6; display:block; }
+  .val-block-body { padding:1.6rem; }
+  .val-block h4 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--lilac); margin-bottom:1rem; }
+  .val-block ul { list-style:none; display:flex; flex-direction:column; gap:.65rem; }
+  .val-block li { display:flex; gap:.75rem; align-items:flex-start; font-size:.88rem; color:var(--purple-pale); line-height:1.55; }
+  .val-block li::before { content:'→'; color:var(--purple-soft); flex-shrink:0; font-weight:700; }
+
+  /* CICLO de validación */
+  .cycle-wrap { margin-top: 3rem; }
+  .cycle-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .cycle-container {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: .5rem;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(168,85,247,.18);
+    border-radius: 20px; padding: 2rem 1.5rem;
+  }
+  .cycle-step {
+    display: flex; flex-direction: column; align-items: center; gap: .4rem;
+    background: linear-gradient(135deg,rgba(107,33,168,.3),rgba(45,20,87,.5));
+    border: 1px solid rgba(168,85,247,.3); border-radius: 14px;
+    padding: 1rem 1.2rem; min-width: 120px; text-align: center;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .cycle-step:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(107,33,168,.4); }
+  .cycle-icon { font-size: 1.6rem; }
+  .cycle-label { font-size: .8rem; font-weight: 600; color: var(--white); line-height: 1.35; }
+  .cycle-sub { font-size: .72rem; color: var(--purple-light); }
+  .cycle-arrow { font-size: 1.4rem; color: rgba(168,85,247,.5); }
+
+  /* ===================== SLIDE 7 ===================== */
+  #slide7 { background:linear-gradient(180deg,#200b38 0%,var(--purple-deep) 100%); }
+
+  .conclusion-wrap { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  @media(max-width:680px){ .conclusion-wrap{ grid-template-columns:1fr; } }
+  .conclusion-img { width:100%; border-radius:24px; height:380px; object-fit:cover; opacity:.85; }
+
+  .conclusion-card {
+    background:linear-gradient(135deg,rgba(107,33,168,.28),rgba(26,10,46,.8));
+    border:1px solid rgba(168,85,247,.28); border-radius:24px; padding:2.8rem;
+  }
+  .conclusion-card p { font-size:clamp(.93rem,1.8vw,1.05rem); color:var(--purple-pale); line-height:1.85; }
+  .conclusion-card p strong { color:var(--white); }
+  .conclusion-highlights { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+  .c-tag {
+    background:rgba(168,85,247,.18); border:1px solid rgba(168,85,247,.35);
+    color:var(--purple-light); font-size:.83rem; font-weight:600;
+    padding:.45rem 1.1rem; border-radius:100px;
+  }
+
+  /* ROADMAP */
+  .roadmap-wrap { margin-top: 3rem; }
+  .roadmap-title {
+    font-size: .75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--lilac); margin-bottom: 1.5rem; text-align: center;
+  }
+  .roadmap {
+    position: relative;
+    display: flex; flex-direction: column; gap: 0;
+    padding-left: 2.5rem;
+  }
+  .roadmap::before {
+    content: '';
+    position: absolute; left: 11px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg, var(--purple-soft), rgba(168,85,247,.1));
+  }
+  .roadmap-item {
+    position: relative; padding: 0 0 1.6rem 1.6rem;
+  }
+  .roadmap-dot {
+    position: absolute; left: -2.15rem; top: 4px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--purple-mid);
+    border: 2px solid var(--purple-soft);
+    box-shadow: 0 0 10px rgba(168,85,247,.5);
+  }
+  .roadmap-phase {
+    font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--purple-soft); margin-bottom: .25rem;
+  }
+  .roadmap-label {
+    font-size: .93rem; font-weight: 700; color: var(--white); margin-bottom: .3rem;
+  }
+  .roadmap-desc { font-size: .84rem; color: var(--purple-pale); line-height: 1.55; }
+
+  /* FOOTER */
+  footer {
+    text-align:center; padding:3rem 2rem;
+    border-top:1px solid rgba(168,85,247,.12);
+    color:var(--purple-mid); font-size:.82rem;
+  }
+  footer span { color:var(--purple-light); }
+
+  /* REVEAL */
+  .reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease,transform .7s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+
+  /* SVG mind map styles */
+  .mm-svg { width:100%; max-width:760px; display:block; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">LUPET<span>.</span></div>
+  <ul>
+    <li><a href="#resumen">Resumen</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#slide1">Producto</a></li>
+    <li><a href="#slide3">Niveles</a></li>
+    <li><a href="#slide4">Valor</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-blob b3"></div>
+  <div class="hero-tag">Presentación del Producto · 2026</div>
+  <h1>LUPET</h1>
+  <p class="hero-sub">Plataforma comunitaria con Inteligencia Artificial para localizar mascotas perdidas de forma rápida y centralizada.</p>
+  <div class="hero-img-row">
+    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&h=200&fit=crop&crop=face" alt="Perro">
+    <img src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?w=200&h=200&fit=crop&crop=face" alt="Gato">
+    <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=200&h=200&fit=crop&crop=face" alt="Mascota">
+  </div>
+</div>
+
+<!-- ========== RESUMEN GENERAL ========== -->
+<section id="resumen">
+  <div class="container">
+    <p class="section-label reveal">Ficha General</p>
+    <h2 class="section-title reveal">Resumen del <em>Producto</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="resumen-table-wrap reveal">
+      <table class="resumen-table">
+        <thead>
+          <tr>
+            <th>Elemento</th>
+            <th>Respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nombre del producto o servicio</td>
+            <td><strong style="color:var(--white)">LUPET</strong></td>
+          </tr>
+          <tr>
+            <td>¿Es nuevo o existente?</td>
+            <td>
+              <span class="tag-inline">Nuevo</span>
+              Producto creado desde cero para el mercado peruano, sin versión previa publicada.
+            </td>
+          </tr>
+          <tr>
+            <td>Tipo de oferta</td>
+            <td>
+              <span class="tag-inline">Producto digital</span>
+              <span class="tag-inline">Servicio web</span>
+              Plataforma web comunitaria accesible desde navegador (mobile-first).
+            </td>
+          </tr>
+          <tr>
+            <td>Cliente objetivo</td>
+            <td>
+              Propietarios de mascotas que las han perdido, ciudadanos que encuentran animales extraviados en la vía pública y comunidades solidarias de vecinos o voluntarios.
+            </td>
+          </tr>
+          <tr>
+            <td>Necesidad que satisface</td>
+            <td>
+              Reunir a mascotas perdidas con sus dueños de manera rápida, centralizada y con apoyo tecnológico, reduciendo el tiempo y el esfuerzo del proceso de búsqueda.
+            </td>
+          </tr>
+          <tr>
+            <td>Problema que resuelve</td>
+            <td>
+              La búsqueda de mascotas perdidas está fragmentada en redes sociales, WhatsApp y carteles físicos. LUPET centraliza los reportes, aplica IA para reconocimiento visual y facilita la comunicación directa entre usuarios.
+            </td>
+          </tr>
+          <tr>
+            <td>Competidores o alternativas</td>
+            <td>
+              <span class="tag-inline">Grupos de Facebook</span>
+              <span class="tag-inline">Grupos de WhatsApp</span>
+              <span class="tag-inline">Carteles físicos</span>
+              <span class="tag-inline">Webs locales de avisos</span>
+              <span class="tag-inline">Instagram comunitario</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo">
+  <div class="container">
+    <p class="section-label reveal">Nuestro Equipo</p>
+    <h2 class="section-title reveal">Los creadores de <em>LUPET</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <img src="img/arachelas.png" alt="Nelida Aracely">
+          </div>
+        </div>
+        <p class="team-name">Nelida Aracely<br>Quispe Calatayud</p>
+        <p class="team-role">Integrante</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <img src="img/eudonaldo.png" alt="Ronaldo Eddson">
+          </div>
+        </div>
+        <p class="team-name">Ronaldo Eddson<br>Quispe Quispe</p>
+        <p class="team-role">Integrante</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <img src="img/joaquin.jpeg" alt="Joaquin Alejandro">
+          </div>
+        </div>
+        <p class="team-name">Joaquin Alejandro<br>Reynoso Quilca</p>
+        <p class="team-role">Integrante</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <img src="img/andree.jpeg" alt="Andreé Alessandro">
+          </div>
+        </div>
+        <p class="team-name">Andreé Alessandro<br>Chili Lima</p>
+        <p class="team-role">Integrante</p>
+      </div>
+    </div>
+
+    <!-- ORGANIGRAMA -->
+    <div class="org-chart-wrap reveal">
+      <p class="org-chart-title">Organigrama del equipo</p>
+      <div class="org-chart">
+        <div class="org-node-top">🐾 Proyecto LUPET — Equipo de Desarrollo</div>
+        <div class="org-connector-down"></div>
+        <!-- Row -->
+        <div style="position:relative; width:100%;">
+          <div style="display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; position:relative; padding-top:20px;">
+            <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:rgba(168,85,247,.3);"></div>
+            <div class="org-col">
+              <div class="org-stem"></div>
+              <div class="org-node-member">
+                <strong>Nelida Aracely</strong>
+                Quispe Calatayud<br>
+                <span style="font-size:.7rem;color:rgba(168,85,247,.7);">Integrante</span>
+              </div>
+            </div>
+            <div class="org-col">
+              <div class="org-stem"></div>
+              <div class="org-node-member">
+                <strong>Ronaldo Eddson</strong>
+                Quispe Quispe<br>
+                <span style="font-size:.7rem;color:rgba(168,85,247,.7);">Integrante</span>
+              </div>
+            </div>
+            <div class="org-col">
+              <div class="org-stem"></div>
+              <div class="org-node-member">
+                <strong>Joaquin Alejandro</strong>
+                Reynoso Quilca<br>
+                <span style="font-size:.7rem;color:rgba(168,85,247,.7);">Integrante</span>
+              </div>
+            </div>
+            <div class="org-col">
+              <div class="org-stem"></div>
+              <div class="org-node-member">
+                <strong>Andreé Alessandro</strong>
+                Chili Lima<br>
+                <span style="font-size:.7rem;color:rgba(168,85,247,.7);">Integrante</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 1 – PRODUCTO Y PROBLEMA -->
+<section id="slide1">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 01</p>
+    <h2 class="section-title reveal">Producto & <em>Problema</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="two-col">
+      <div class="card-glass reveal">
+        <img class="card-glass-img"
+          src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&h=360&fit=crop"
+          alt="Dos perros corriendo">
+        <div class="card-glass-body">
+          <h3>¿Qué es LUPET?</h3>
+          <p>LUPET es un <strong style="color:var(--lilac)">producto digital / servicio</strong> diseñado para centralizar la búsqueda de mascotas perdidas en una sola plataforma, aprovechando inteligencia artificial, geolocalización y comunicación en tiempo real.</p>
+          <div class="alt-chips">
+            <span class="chip">Plataforma web</span>
+            <span class="chip">IA visual</span>
+            <span class="chip">Geolocalización</span>
+            <span class="chip">Chat en vivo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-glass reveal">
+        <img class="card-glass-img"
+          src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=700&h=360&fit=crop"
+          alt="Cartel de mascota perdida">
+        <div class="card-glass-body">
+          <div class="problem-badge">⚠ Problema detectado</div>
+          <h3>La búsqueda es dispersa y lenta</h3>
+          <p>Cuando una mascota se pierde, los propietarios recurren a métodos fragmentados que retrasan el reencuentro y reducen las probabilidades de éxito.</p>
+          <div class="alt-chips">
+            <span class="chip">Redes sociales</span>
+            <span class="chip">WhatsApp</span>
+            <span class="chip">Carteles físicos</span>
+            <span class="chip">Webs locales</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGRAMA DE FLUJO: El problema → LUPET → solución -->
+    <div class="flow-diagram reveal">
+      <p class="flow-title">Flujo: del problema a la solución con LUPET</p>
+      <div class="flow-row">
+        <div class="flow-box start">😰<br>Mascota<br>perdida</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">📱 Publicación<br>dispersa en<br>redes/WhatsApp</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">⏳ Búsqueda<br>lenta y<br>desorganizada</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#fca5a5;">❌ Bajo índice<br>de reencuentro</div>
+      </div>
+      <div style="margin:1.2rem 0;display:flex;align-items:center;gap:1rem;justify-content:center;">
+        <div style="flex:1;max-width:180px;height:2px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.4));"></div>
+        <div class="flow-box highlight" style="padding:.5rem 1.4rem;font-size:.8rem;">Con LUPET</div>
+        <div style="flex:1;max-width:180px;height:2px;background:linear-gradient(90deg,rgba(168,85,247,.4),transparent);"></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box start">😰<br>Mascota<br>perdida</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box highlight">🐾 Reporte en<br>LUPET + mapa<br>interactivo</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box highlight">🤖 IA detecta<br>coincidencias<br>visuales</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box highlight">💬 Chat directo<br>entre usuarios</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box end">🎉 Mascota<br>encontrada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2 – CLIENTE OBJETIVO -->
+<section id="slide2">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 02</p>
+    <h2 class="section-title reveal">Cliente <em>Objetivo</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="audience-grid">
+      <div class="audience-card reveal">
+        <img class="aud-img"
+          src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=500&h=300&fit=crop"
+          alt="Propietario con su mascota">
+        <div class="aud-body">
+          <h4>Propietarios de mascotas</h4>
+          <p>Personas con mascotas que necesitan encontrarlas de forma rápida y organizada cuando se pierden.</p>
+        </div>
+      </div>
+      <div class="audience-card reveal">
+        <img class="aud-img"
+          src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&h=300&fit=crop"
+          alt="Perro en la calle">
+        <div class="aud-body">
+          <h4>Ciudadanos que encuentran animales</h4>
+          <p>Personas que hallan animales extraviados en la vía pública y desean reportarlos para reunirlos con sus dueños.</p>
+        </div>
+      </div>
+      <div class="audience-card reveal">
+        <img class="aud-img"
+          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&h=300&fit=crop"
+          alt="Comunidad ayudando">
+        <div class="aud-body">
+          <h4>Comunidad solidaria</h4>
+          <p>Vecinos y voluntarios dispuestos a colaborar en la búsqueda y difusión de reportes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-row">
+      <div class="need-item reveal"><div class="need-dot"></div><p>Reportar mascotas perdidas o encontradas de forma centralizada</p></div>
+      <div class="need-item reveal"><div class="need-dot"></div><p>Identificar animales mediante similitud visual por IA</p></div>
+      <div class="need-item reveal"><div class="need-dot"></div><p>Comunicarse directamente con otros usuarios en tiempo real</p></div>
+      <div class="need-item reveal"><div class="need-dot"></div><p>Reducir el tiempo de búsqueda y aumentar el reencuentro</p></div>
+    </div>
+
+    <!-- MAPA MENTAL – clientes objetivo -->
+    <div class="mind-map-wrap reveal">
+      <p class="mind-map-title">Mapa mental — Clientes & necesidades</p>
+      <div class="mind-map-svg-container">
+        <svg class="mm-svg" viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+          <!-- Líneas de ramas principales -->
+          <line x1="380" y1="210" x2="130" y2="105" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+          <line x1="380" y1="210" x2="130" y2="210" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+          <line x1="380" y1="210" x2="130" y2="315" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+          <line x1="380" y1="210" x2="630" y2="105" stroke="rgba(192,132,252,.4)" stroke-width="2"/>
+          <line x1="380" y1="210" x2="630" y2="210" stroke="rgba(192,132,252,.4)" stroke-width="2"/>
+          <line x1="380" y1="210" x2="630" y2="315" stroke="rgba(192,132,252,.4)" stroke-width="2"/>
+
+          <!-- Sub-ramas izquierda -->
+          <line x1="130" y1="105" x2="20" y2="60" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+          <line x1="130" y1="105" x2="20" y2="105" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+          <line x1="130" y1="210" x2="20" y2="185" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+          <line x1="130" y1="210" x2="20" y2="235" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+          <line x1="130" y1="315" x2="20" y2="295" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+          <line x1="130" y1="315" x2="20" y2="340" stroke="rgba(168,85,247,.25)" stroke-width="1.2"/>
+
+          <!-- Sub-ramas derecha -->
+          <line x1="630" y1="105" x2="740" y2="60" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+          <line x1="630" y1="105" x2="740" y2="105" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+          <line x1="630" y1="210" x2="740" y2="185" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+          <line x1="630" y1="210" x2="740" y2="235" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+          <line x1="630" y1="315" x2="740" y2="295" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+          <line x1="630" y1="315" x2="740" y2="340" stroke="rgba(192,132,252,.25)" stroke-width="1.2"/>
+
+          <!-- Nodo central -->
+          <ellipse cx="380" cy="210" rx="68" ry="38" fill="rgba(107,33,168,.5)" stroke="rgba(168,85,247,.6)" stroke-width="2"/>
+          <text x="380" y="205" text-anchor="middle" fill="white" font-size="13" font-weight="700">🐾 LUPET</text>
+          <text x="380" y="222" text-anchor="middle" fill="#d8b4fe" font-size="10">Usuarios</text>
+
+          <!-- Nodos rama izquierda -->
+          <rect x="60" y="82" width="140" height="46" rx="10" fill="rgba(107,33,168,.35)" stroke="rgba(168,85,247,.4)" stroke-width="1.2"/>
+          <text x="130" y="101" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">👤 Propietarios</text>
+          <text x="130" y="119" text-anchor="middle" fill="#f3e8ff" font-size="9">de mascotas</text>
+
+          <rect x="60" y="187" width="140" height="46" rx="10" fill="rgba(107,33,168,.35)" stroke="rgba(168,85,247,.4)" stroke-width="1.2"/>
+          <text x="130" y="206" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">🚶 Ciudadanos</text>
+          <text x="130" y="222" text-anchor="middle" fill="#f3e8ff" font-size="9">que encuentran animales</text>
+
+          <rect x="60" y="292" width="140" height="46" rx="10" fill="rgba(107,33,168,.35)" stroke="rgba(168,85,247,.4)" stroke-width="1.2"/>
+          <text x="130" y="311" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">🤝 Comunidad</text>
+          <text x="130" y="327" text-anchor="middle" fill="#f3e8ff" font-size="9">solidaria / voluntarios</text>
+
+          <!-- Nodos rama derecha -->
+          <rect x="560" y="82" width="140" height="46" rx="10" fill="rgba(45,20,87,.5)" stroke="rgba(192,132,252,.4)" stroke-width="1.2"/>
+          <text x="630" y="101" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">🤖 IA Visual</text>
+          <text x="630" y="119" text-anchor="middle" fill="#f3e8ff" font-size="9">Reconocimiento de fotos</text>
+
+          <rect x="560" y="187" width="140" height="46" rx="10" fill="rgba(45,20,87,.5)" stroke="rgba(192,132,252,.4)" stroke-width="1.2"/>
+          <text x="630" y="206" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">🗺 Mapa</text>
+          <text x="630" y="222" text-anchor="middle" fill="#f3e8ff" font-size="9">Geolocalización en tiempo real</text>
+
+          <rect x="560" y="292" width="140" height="46" rx="10" fill="rgba(45,20,87,.5)" stroke="rgba(192,132,252,.4)" stroke-width="1.2"/>
+          <text x="630" y="311" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700">💬 Chat</text>
+          <text x="630" y="327" text-anchor="middle" fill="#f3e8ff" font-size="9">Comunicación directa</text>
+
+          <!-- Sub-nodos izquierda -->
+          <text x="15" y="63" fill="rgba(216,180,254,.7)" font-size="8.5">🔍 Buscar mascota perdida</text>
+          <text x="15" y="108" fill="rgba(216,180,254,.7)" font-size="8.5">📝 Publicar reporte</text>
+          <text x="15" y="188" fill="rgba(216,180,254,.7)" font-size="8.5">📍 Reportar hallazgo</text>
+          <text x="15" y="238" fill="rgba(216,180,254,.7)" font-size="8.5">📞 Contactar al dueño</text>
+          <text x="15" y="298" fill="rgba(216,180,254,.7)" font-size="8.5">🔔 Recibir alertas</text>
+          <text x="15" y="343" fill="rgba(216,180,254,.7)" font-size="8.5">📢 Difundir reportes</text>
+
+          <!-- Sub-nodos derecha -->
+          <text x="745" y="63" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">MobileNetV2</text>
+          <text x="745" y="108" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">Similitud coseno</text>
+          <text x="745" y="188" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">Zona de pérdida</text>
+          <text x="745" y="238" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">Reportes cercanos</text>
+          <text x="745" y="298" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">WhatsApp urgente</text>
+          <text x="745" y="343" fill="rgba(216,180,254,.7)" font-size="8.5" text-anchor="end">Notificaciones push</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3 – NIVELES DEL PRODUCTO -->
+<section id="slide3">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 03</p>
+    <h2 class="section-title reveal">Niveles del <em>Producto</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="levels-stack">
+      <div class="level-card reveal">
+        <div class="level-label">
+          <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=440&h=280&fit=crop" alt="Nivel básico">
+          <div class="level-label-text">
+            <span class="level-num">Nivel 01</span>
+            <span class="level-name">Producto Básico</span>
+          </div>
+        </div>
+        <div class="level-body">
+          <h4>Necesidad esencial</h4>
+          <p>Localización de mascotas perdidas y reducción del tiempo de búsqueda. Este es el núcleo de valor que LUPET ofrece a cada usuario.</p>
+        </div>
+      </div>
+
+      <div class="level-card reveal">
+        <div class="level-label">
+          <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=440&h=280&fit=crop" alt="Nivel real">
+          <div class="level-label-text">
+            <span class="level-num">Nivel 02</span>
+            <span class="level-name">Producto Real</span>
+          </div>
+        </div>
+        <div class="level-body">
+          <h4>Características tangibles</h4>
+          <p>Plataforma con <strong style="color:var(--lilac)">mapa interactivo</strong>, registro de mascotas, similitud visual por IA, <strong style="color:var(--lilac)">chat en tiempo real</strong> y notificaciones automáticas.</p>
+        </div>
+      </div>
+
+      <div class="level-card reveal">
+        <div class="level-label">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=440&h=280&fit=crop" alt="Nivel aumentado">
+          <div class="level-label-text">
+            <span class="level-num">Nivel 03</span>
+            <span class="level-name">Producto Aumentado</span>
+          </div>
+        </div>
+        <div class="level-body">
+          <h4>Valor añadido</h4>
+          <p><strong style="color:var(--lilac)">Asistente IA conversacional</strong>, comunidades grupales temáticas, historial de casos resueltos y contacto urgente vía WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIRÁMIDE DE NIVELES -->
+    <div class="pyramid-wrap reveal">
+      <p class="pyramid-title">Pirámide de niveles del producto</p>
+      <div class="pyramid-container">
+        <div class="pyramid-level pyramid-level-3">
+          <div>
+            <div class="pyramid-level-label">🚀 Producto Aumentado</div>
+            <div class="pyramid-level-sub">Asistente IA · Comunidades · Historial · WhatsApp urgente</div>
+          </div>
+          <div class="pyramid-level-num">Nivel 03</div>
+        </div>
+        <div class="pyramid-level pyramid-level-2">
+          <div>
+            <div class="pyramid-level-label">⚙️ Producto Real</div>
+            <div class="pyramid-level-sub">Mapa interactivo · Registro · IA visual · Chat · Notificaciones</div>
+          </div>
+          <div class="pyramid-level-num">Nivel 02</div>
+        </div>
+        <div class="pyramid-level pyramid-level-1">
+          <div>
+            <div class="pyramid-level-label">🐾 Producto Básico</div>
+            <div class="pyramid-level-sub">Localizar mascotas perdidas — reducir tiempo de búsqueda — reunir a dueños con sus mascotas</div>
+          </div>
+          <div class="pyramid-level-num">Nivel 01</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 – PROPUESTA DE VALOR -->
+<section id="slide4">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 04</p>
+    <h2 class="section-title reveal">Propuesta de <em>Valor</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="value-wrap">
+      <img class="value-img reveal"
+        src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=700&h=680&fit=crop"
+        alt="Mascota y dueño reunidos">
+
+      <div>
+        <div class="value-box reveal">
+          <p>
+            Para <strong>propietarios de mascotas y ciudadanos que encuentran animales en la vía pública</strong> que necesitan reportar, buscar o identificar mascotas perdidas, ofrecemos una <strong>plataforma web comunitaria con similitud visual mediante inteligencia artificial</strong>, geolocalización interactiva y comunicación directa entre usuarios, que permite <strong>reducir el tiempo de búsqueda y mejorar las probabilidades de reencuentro</strong>, a diferencia de publicaciones dispersas en redes sociales, grupos de WhatsApp o carteles físicos.
+          </p>
+        </div>
+        <div class="value-pills reveal">
+          <span class="v-pill">IA Visual</span>
+          <span class="v-pill">Geolocalización</span>
+          <span class="v-pill">Chat directo</span>
+          <span class="v-pill">Acceso gratuito</span>
+          <span class="v-pill">Optimizado móvil</span>
+          <span class="v-pill">Impacto social</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANVAS DE VALOR -->
+    <div class="value-canvas-wrap reveal">
+      <p class="value-canvas-title">Canvas simplificado de propuesta de valor</p>
+      <div class="value-canvas">
+        <div class="vc-col">
+          <h5>😣 Problemas del cliente</h5>
+          <div class="vc-item"><div class="vc-dot"></div>Información dispersa en múltiples canales</div>
+          <div class="vc-item"><div class="vc-dot"></div>Tiempo de respuesta lento</div>
+          <div class="vc-item"><div class="vc-dot"></div>Sin herramienta de reconocimiento visual</div>
+          <div class="vc-item"><div class="vc-dot"></div>Difícil comunicación entre usuarios</div>
+          <div class="vc-item"><div class="vc-dot"></div>Sin historial ni seguimiento del caso</div>
+        </div>
+        <div class="vc-col">
+          <h5>🐾 LUPET ofrece</h5>
+          <div class="vc-item"><div class="vc-dot"></div>Plataforma centralizada única</div>
+          <div class="vc-item"><div class="vc-dot"></div>IA para detectar coincidencias visuales</div>
+          <div class="vc-item"><div class="vc-dot"></div>Mapa georreferenciado en tiempo real</div>
+          <div class="vc-item"><div class="vc-dot"></div>Chat directo entre dueño y reportador</div>
+          <div class="vc-item"><div class="vc-dot"></div>Historial de casos y asistente IA</div>
+        </div>
+        <div class="vc-col">
+          <h5>✅ Beneficios para el usuario</h5>
+          <div class="vc-item"><div class="vc-dot"></div>Mayor velocidad de reencuentro</div>
+          <div class="vc-item"><div class="vc-dot"></div>Menos esfuerzo en la búsqueda</div>
+          <div class="vc-item"><div class="vc-dot"></div>Comunidad activa y solidaria</div>
+          <div class="vc-item"><div class="vc-dot"></div>Acceso gratuito y desde el móvil</div>
+          <div class="vc-item"><div class="vc-dot"></div>Impacto social positivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5 – DIFERENCIACIÓN -->
+<section id="slide5">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 05</p>
+    <h2 class="section-title reveal"><em>Diferenciación</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="diff-wrap">
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Aplicación en LUPET</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Funcional</td>
+              <td>Mapa interactivo con reportes georreferenciados y dashboard comunitario de mascotas perdidas.</td>
+            </tr>
+            <tr>
+              <td>Tecnológica</td>
+              <td>Similitud visual mediante TensorFlow.js y MobileNetV2, comparación por embeddings y similitud coseno.</td>
+            </tr>
+            <tr>
+              <td>Experiencial</td>
+              <td>Interfaz responsive optimizada para móvil, flujo simple e integración con WhatsApp para contacto urgente.</td>
+            </tr>
+            <tr>
+              <td>Precio</td>
+              <td>Acceso completamente gratuito para todos los usuarios registrados.</td>
+            </tr>
+            <tr>
+              <td>Adicional</td>
+              <td>Asistente IA conversacional para orientación sobre mascotas y comunidades grupales temáticas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <img class="diff-side-img reveal"
+        src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=600&fit=crop"
+        alt="Tecnología">
+    </div>
+
+    <!-- MATRIZ COMPARATIVA -->
+    <div class="comp-matrix-wrap reveal">
+      <p class="comp-matrix-title">Matriz comparativa: LUPET vs. alternativas actuales</p>
+      <div style="overflow-x:auto;">
+        <table class="comp-matrix">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>LUPET</th>
+              <th>Facebook / Instagram</th>
+              <th>WhatsApp grupos</th>
+              <th>Carteles físicos</th>
+              <th>Webs locales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Centralización de reportes</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="partial">◑</span></td>
+            </tr>
+            <tr>
+              <td>Reconocimiento visual por IA</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+            </tr>
+            <tr>
+              <td>Mapa georreferenciado</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="partial">◑</span></td>
+            </tr>
+            <tr>
+              <td>Chat directo entre usuarios</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="partial">◑</span></td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+            </tr>
+            <tr>
+              <td>Acceso gratuito</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="check">✔</span></td>
+              <td><span class="check">✔</span></td>
+              <td><span class="partial">◑</span></td>
+              <td><span class="partial">◑</span></td>
+            </tr>
+            <tr>
+              <td>Optimizado para móvil</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="check">✔</span></td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="partial">◑</span></td>
+            </tr>
+            <tr>
+              <td>Asistente IA conversacional</td>
+              <td><span class="check">✔</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+              <td><span class="cross">✘</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.75rem;color:rgba(168,85,247,.6);margin-top:.8rem;text-align:center;">
+        ✔ Disponible &nbsp;·&nbsp; ◑ Parcialmente &nbsp;·&nbsp; ✘ No disponible
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6 – VALIDACIÓN CUALITATIVA -->
+<section id="slide6">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 06</p>
+    <h2 class="section-title reveal">Validación <em>Cualitativa</em></h2>
+    <div class="divider reveal"></div>
+    <p class="reveal" style="color:var(--purple-pale);font-size:.95rem;margin-bottom:2rem;max-width:640px;">
+      Prueba piloto con usuarios reales durante <strong style="color:var(--lilac)">una semana</strong>, recogiendo comentarios estructurados sobre la experiencia.
+    </p>
+
+    <div class="val-grid">
+      <div class="val-block reveal">
+        <img class="val-block-img"
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&h=240&fit=crop"
+          alt="Análisis y feedback">
+        <div class="val-block-body">
+          <h4>Áreas de feedback</h4>
+          <ul>
+            <li>Facilidad de uso de la plataforma</li>
+            <li>Utilidad de las notificaciones y coincidencias visuales</li>
+            <li>Claridad del mapa interactivo y los reportes</li>
+            <li>Diseño de la interfaz en dispositivo móvil</li>
+            <li>Funciones más valoradas por el usuario</li>
+            <li>Aspectos que deberían mejorarse</li>
+          </ul>
+        </div>
+      </div>
+      <div class="val-block reveal">
+        <img class="val-block-img"
+          src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&h=240&fit=crop"
+          alt="Preguntas y respuestas">
+        <div class="val-block-body">
+          <h4>Preguntas clave</h4>
+          <ul>
+            <li>¿La plataforma te ayudó a centralizar mejor la búsqueda?</li>
+            <li>¿Qué función te pareció más útil?</li>
+            <li>¿Qué cambiarías o mejorarías?</li>
+            <li>¿La recomendarías a otras personas?</li>
+            <li>¿Qué diferencia notas frente a redes sociales o WhatsApp?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CICLO DE VALIDACIÓN -->
+    <div class="cycle-wrap reveal">
+      <p class="cycle-title">Ciclo del proceso de validación cualitativa</p>
+      <div class="cycle-container">
+        <div class="cycle-step">
+          <div class="cycle-icon">🎯</div>
+          <div class="cycle-label">Reclutamiento</div>
+          <div class="cycle-sub">Selección de usuarios piloto</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-step">
+          <div class="cycle-icon">🐾</div>
+          <div class="cycle-label">Uso libre</div>
+          <div class="cycle-sub">1 semana en la plataforma</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-step">
+          <div class="cycle-icon">📋</div>
+          <div class="cycle-label">Preguntas clave</div>
+          <div class="cycle-sub">Entrevista estructurada</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-step">
+          <div class="cycle-icon">📊</div>
+          <div class="cycle-label">Análisis</div>
+          <div class="cycle-sub">Síntesis de feedback</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-step">
+          <div class="cycle-icon">🔧</div>
+          <div class="cycle-label">Mejoras</div>
+          <div class="cycle-sub">Iteración del producto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7 – CONCLUSIÓN -->
+<section id="slide7">
+  <div class="container">
+    <p class="section-label reveal">Diapositiva 07</p>
+    <h2 class="section-title reveal"><em>Conclusión</em></h2>
+    <div class="divider reveal"></div>
+
+    <div class="conclusion-wrap">
+      <img class="conclusion-img reveal"
+        src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&h=760&fit=crop"
+        alt="Perro feliz">
+
+      <div class="conclusion-card reveal">
+        <p>
+          <strong>LUPET responde a una necesidad real y cotidiana</strong>: recuperar mascotas perdidas de forma más rápida y organizada. A diferencia de las alternativas actuales, <strong>centraliza los reportes</strong> en una sola plataforma, aplica <strong>inteligencia artificial</strong> para detectar coincidencias visuales y facilita la <strong>comunicación inmediata</strong> entre usuarios. Su enfoque comunitario, acceso gratuito y optimización para dispositivos móviles la convierten en una herramienta tecnológica <strong>accesible, funcional y con impacto social positivo</strong>.
+        </p>
+        <div class="conclusion-highlights">
+          <span class="c-tag">Centralización</span>
+          <span class="c-tag">Inteligencia Artificial</span>
+          <span class="c-tag">Comunidad</span>
+          <span class="c-tag">Gratuito</span>
+          <span class="c-tag">Impacto Social</span>
+          <span class="c-tag">Mobile First</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="roadmap-wrap reveal">
+      <p class="roadmap-title">Hoja de ruta del proyecto</p>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-phase">Fase 1 — Investigación</div>
+          <div class="roadmap-label">Detección del problema e investigación de mercado</div>
+          <div class="roadmap-desc">Identificación de la necesidad de centralizar la búsqueda de mascotas perdidas. Análisis de competidores y alternativas existentes.</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-phase">Fase 2 — Diseño</div>
+          <div class="roadmap-label">Diseño del producto y arquitectura técnica</div>
+          <div class="roadmap-desc">Definición de los tres niveles del producto, propuesta de valor y selección del stack tecnológico (TensorFlow.js, MobileNetV2, geolocalización).</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-phase">Fase 3 — Desarrollo</div>
+          <div class="roadmap-label">Construcción de la plataforma web</div>
+          <div class="roadmap-desc">Implementación del mapa interactivo, módulo de IA visual, sistema de chat en tiempo real y notificaciones automáticas.</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-phase">Fase 4 — Validación</div>
+          <div class="roadmap-label">Prueba piloto con usuarios reales</div>
+          <div class="roadmap-desc">Una semana de prueba piloto con usuarios reales, recolección de feedback cualitativo estructurado e iteración.</div>
+        </div>
+        <div class="roadmap-item" style="padding-bottom:0;">
+          <div class="roadmap-dot" style="background:var(--purple-soft);box-shadow:0 0 16px rgba(168,85,247,.8);"></div>
+          <div class="roadmap-phase">Fase 5 — Lanzamiento</div>
+          <div class="roadmap-label">Despliegue y escalamiento comunitario</div>
+          <div class="roadmap-desc">Lanzamiento público, estrategia de crecimiento comunitario, mejoras continuas basadas en retroalimentación de usuarios.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>LUPET</span> · Proyecto académico 2026 · Todos los derechos reservados
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
